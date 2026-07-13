@@ -1,5 +1,8 @@
 package com.namish.demo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class student {
     private String name;
     private int age;
