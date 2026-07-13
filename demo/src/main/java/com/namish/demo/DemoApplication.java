@@ -17,8 +17,8 @@ public class DemoApplication {
 //		st.setAge(20);
 //		System.out.println(st.getName());
 //		System.out.println(st.getAge());
-		OrderService os=context.getBean(OrderService.class);
-		os.placeHolder();
+//		OrderService os=context.getBean(OrderService.class);
+//		os.placeHolder();
 
 	}
 
