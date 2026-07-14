@@ -29,5 +29,12 @@ public class Myportfolio {
     public String edu(){
         return "LASEC, Jhalawar(RAJ)";
     }
-
+    @GetMapping("/project")
+    public String project(){
+        return """
+                <h1>Project</h1>
+                <ul>Prescripto</ul>
+                <ul>Stock market Analyzer</ul>
+        """;
+    }
 }
