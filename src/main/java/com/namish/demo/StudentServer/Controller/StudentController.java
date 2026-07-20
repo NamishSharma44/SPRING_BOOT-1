@@ -2,6 +2,8 @@ package com.namish.demo.StudentServer.Controller;
 
 import com.namish.demo.StudentServer.DTO.createStudentRequestDTO;
 import com.namish.demo.StudentServer.DTO.createStudentResponseDTO;
+import com.namish.demo.StudentServer.DTO.updateRequestDTO;
+import com.namish.demo.StudentServer.DTO.updateResponseDTO;
 import com.namish.demo.StudentServer.Entity.Student;
 import com.namish.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +44,8 @@ public class StudentController {
     }
 
     @PutMapping("/updateStudent/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody Student student){
-        Student result = studentService.studentUpdate(id, student);
+    public ResponseEntity<?> updateStudent(@PathVariable int id, @RequestBody updateRequestDTO requestDTO) {
+        updateResponseDTO result = studentService.studentUpdate(id, requestDTO);
         if(result == null)
         {
             return ResponseEntity.status(400).body("Invalid input");

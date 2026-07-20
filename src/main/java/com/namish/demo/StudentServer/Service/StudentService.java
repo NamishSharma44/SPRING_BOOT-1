@@ -2,6 +2,8 @@ package com.namish.demo.StudentServer.Service;
 
 import com.namish.demo.StudentServer.DTO.createStudentRequestDTO;
 import com.namish.demo.StudentServer.DTO.createStudentResponseDTO;
+import com.namish.demo.StudentServer.DTO.updateRequestDTO;
+import com.namish.demo.StudentServer.DTO.updateResponseDTO;
 import com.namish.demo.StudentServer.Entity.Student;
 import com.namish.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
-    public Student studentUpdate(int id, Student student) {
+    public updateResponseDTO studentUpdate(int id, updateRequestDTO RequestDTO) {
 
         Student result = studentRepository.findById(id).orElse(null);
 
@@ -36,12 +38,12 @@ public class StudentService {
             return null;
         }
 
-        result.setName(student.getName());
-        result.setAge(student.getAge());
-        result.setDepartment(student.getDepartment());
+        result.setName(RequestDTO.getName());
+        result.setAge(RequestDTO.getAge());
+//        result.setDepartment(RequestDTO.getDepartment());
         result.setUpdatedAt(LocalDateTime.now());
-
-        return studentRepository.save(result);
+        Student updatedStudent = studentRepository.save(result);
+        return mapToUpdateResponseDTO(updatedStudent);
     }
 
     public Student deleteStudent(int id) {
@@ -74,5 +76,11 @@ public class StudentService {
 
         return createStudentResponseDTO;
 
+    }
+    private updateResponseDTO mapToUpdateResponseDTO(Student student) {
+        updateResponseDTO responseDTO = new updateResponseDTO();
+        responseDTO.setName(student.getName());
+        responseDTO.setAge(student.getAge());
+        return  responseDTO;
     }
 }
